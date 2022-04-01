@@ -1,7 +1,9 @@
 package com.cydeo.stepDefs;
 
 import com.cydeo.pages.HomePage;
+import com.cydeo.utility.Driver;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 
 import java.util.List;
@@ -22,7 +24,18 @@ public class HomePageStepDefs {
     }
 
 
+    @When("User click on {string}")
+    public void userClickOn(String nameOfModule) {
+        homePage.clickOnModule( nameOfModule);
 
+        System.out.println("nameOfModule = " + nameOfModule);
+    }
 
+    @Then("User should be directed on the {string} page")
+    public void userShouldBeDirectedOnThePage(String expectedTitle) {
 
+        String actualtitle = Driver.getDriver().getTitle();
+        Assert.assertEquals(expectedTitle, actualtitle);
+        System.out.println("verify the PageName here");
+    }
 }
