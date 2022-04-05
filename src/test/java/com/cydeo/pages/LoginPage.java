@@ -49,7 +49,6 @@ public class LoginPage {
 
 
 
-
     public void loginToWebsite() {
         usernameInput.sendKeys(ConfigReader.read("user"));
         passwordInput.sendKeys(ConfigReader.read("password"));

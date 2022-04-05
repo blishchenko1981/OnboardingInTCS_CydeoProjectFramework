@@ -36,6 +36,5 @@ public class HomePageStepDefs {
 
         String actualtitle = Driver.getDriver().getTitle();
         Assert.assertEquals(expectedTitle, actualtitle);
-        System.out.println("verify the PageName here");
     }
 }
