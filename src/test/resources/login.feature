@@ -7,6 +7,9 @@ Feature: as a user I should be able to log in
     And Click submit button
     Then User on Home page
 
+    
+
+
     @ui
     Scenario: If user provide wrong Username and Password the message "Wrong username or password" should appear
       Given User  on the login page

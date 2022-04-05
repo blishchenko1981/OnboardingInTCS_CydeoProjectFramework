@@ -15,7 +15,7 @@ Feature: As a user, I should be able to access to Files module
       Then User should be directed on the "Photos - Trycloud QA" page
 
       @ui
-      Scenario: user should be able create new folder and upload file to new folder
+      Scenario: user should be able create new folder
         When User click on "Files"
         And Click on Plus button
         And Click on New Folder
