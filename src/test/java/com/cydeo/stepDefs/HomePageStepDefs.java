@@ -1,6 +1,7 @@
 package com.cydeo.stepDefs;
 
 import com.cydeo.pages.HomePage;
+import com.cydeo.utility.BrowserUtil;
 import com.cydeo.utility.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,7 +28,7 @@ public class HomePageStepDefs {
     @When("User click on {string}")
     public void userClickOn(String nameOfModule) {
         homePage.clickOnModule( nameOfModule);
-
+        BrowserUtil.waitAlittle(3);
         System.out.println("nameOfModule = " + nameOfModule);
     }
 
