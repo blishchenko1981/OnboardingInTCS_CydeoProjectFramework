@@ -1,6 +1,7 @@
 package com.cydeo.stepDefs;
 
 import com.cydeo.pages.FilesPage;
+import com.cydeo.utility.BrowserUtil;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -45,7 +46,17 @@ public class FielsPageStepDefs {
 
     @And("click on checkbox for selecting all folders")
     public void clickOnCheckboxForSelectingAllFolders() {
+        //BrowserUtil.waitAlittle(2);
+filesPage.clickToselectAllFolders();
 
+    }
+
+    @Then("all folders should be selected")
+    public void allFoldersShouldBeSelected() {
+
+        System.out.println("check if all folders had beeing selected");
+
+        Assert.assertTrue(filesPage.checkIfAllFoldersSelected());
 
     }
 }

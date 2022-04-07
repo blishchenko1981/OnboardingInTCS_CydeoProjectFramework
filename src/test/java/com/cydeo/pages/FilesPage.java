@@ -2,9 +2,12 @@ package com.cydeo.pages;
 
 import com.cydeo.utility.BrowserUtil;
 import com.cydeo.utility.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.swing.text.Utilities;
 import java.util.List;
@@ -26,6 +29,14 @@ public class FilesPage {
 
     @FindBy(xpath = "//span[@class='nametext']")
     private List<WebElement> listOfFolders;
+
+    @FindBy(xpath = "//label[@for='select_all_files']")
+    private WebElement selectAllFoldersCheckBox;
+
+    @FindBy(xpath = "//tr//input[@type = 'checkbox'][@class='selectCheckBox checkbox']")
+    private List<WebElement> allFoldersCheckboxes;
+
+
 
     public void clickOnPlusButton() {
         plusButton.click();
@@ -52,6 +63,25 @@ public class FilesPage {
         }
 
         return isContains;
+    }
+
+    public void clickToselectAllFolders(){
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        selectAllFoldersCheckBox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@for='select_all_files']")));
+        selectAllFoldersCheckBox.click();
+        BrowserUtil.waitAlittle(2);
+    }
+
+    public boolean checkIfAllFoldersSelected(){
+        boolean allSelected = true;
+        for (WebElement checkbox : allFoldersCheckboxes) {
+            if(!checkbox.isSelected()){
+                allSelected = false;
+                break;
+            }
+        }
+
+        return allSelected;
     }
 
 
