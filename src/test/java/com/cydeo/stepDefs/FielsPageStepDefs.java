@@ -2,6 +2,7 @@ package com.cydeo.stepDefs;
 
 import com.cydeo.pages.FilesPage;
 import com.github.javafaker.Faker;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -42,4 +43,9 @@ public class FielsPageStepDefs {
     }
 
 
+    @And("click on checkbox for selecting all folders")
+    public void clickOnCheckboxForSelectingAllFolders() {
+
+
+    }
 }
