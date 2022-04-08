@@ -35,7 +35,16 @@ public class FilesPage {
 
     @FindBy(xpath = "//tr//input[@type = 'checkbox'][@class='selectCheckBox checkbox']")
     private List<WebElement> allFoldersCheckboxes;
+    int numberOfFolders = allFoldersCheckboxes.size();
 
+    @FindBy(xpath= "//*[@id=\"fileList\"]/tr[2]//a[2]")
+    private WebElement actionIcon;
+
+    @FindBy(xpath = "//span[text() = 'Add to favoites']")
+    private WebElement addToFavorites;
+
+    @FindBy(xpath = "//span[text() = 'Remove from favorites']")
+    private WebElement removeFromFavorites;
 
 
     public void clickOnPlusButton() {
@@ -84,6 +93,18 @@ public class FilesPage {
         return allSelected;
     }
 
+
+    public void clickOnActionIcon() {
+        actionIcon.click();
+    }
+
+    public void clickAddToFavorites(){
+        addToFavorites.click();
+    }
+
+    public void removeFolderFromFavorites(){
+        removeFromFavorites.click();
+    }
 
 
 }

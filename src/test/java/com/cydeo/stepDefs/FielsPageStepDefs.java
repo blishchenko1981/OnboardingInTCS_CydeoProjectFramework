@@ -59,4 +59,25 @@ filesPage.clickToselectAllFolders();
         Assert.assertTrue(filesPage.checkIfAllFoldersSelected());
 
     }
+
+    /*
+    next scope of methods is related to "Add to favorites"
+     */
+
+    @And("User click on Action icon")
+    public void userClickOnActionIcon() {
+        filesPage.clickOnActionIcon();
+    }
+
+    @And("User choose Add to favorites")
+    public void userChooseAddToFavorites() {
+    }
+
+    @And("User click on favorites module on left side")
+    public void userClickOnFavoritesModuleOnLeftSide() {
+    }
+
+    @Then("User should be able to see chosen file in favorites")
+    public void userShouldBeAbleToSeeChosenFileInFavorites() {
+    }
 }
