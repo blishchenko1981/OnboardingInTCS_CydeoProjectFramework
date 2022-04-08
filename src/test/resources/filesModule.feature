@@ -36,12 +36,12 @@ Feature: As a user, I should be able to access to Files module
     And give a name to new folder
     Then should be able to create new empty folder
 
-    @ui
-    Scenario: user should be able to add file to Favorites
-      When User click on "Files"
-      And User click on Action icon on "freeman.hoeger" folder
-      And User choose Add to favorites
-      And User click on favorites module on left side
-      Then User should be able to see chosen file in favorites
+  @ui
+  Scenario: user should be able to add file to Favorites
+    When User click on "Files"
+    And User click on Action icon on "cassandra.hudson" folder
+    And User choose Add to favorites
+    And User click on favorites module on left side
+    Then User should be able to see chosen file in favorites
 
 
