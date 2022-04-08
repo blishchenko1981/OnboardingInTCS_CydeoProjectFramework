@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.swing.text.Utilities;
+import java.util.Collections;
 import java.util.List;
 
 public class FilesPage {
@@ -35,17 +36,21 @@ public class FilesPage {
 
     @FindBy(xpath = "//tr//input[@type = 'checkbox'][@class='selectCheckBox checkbox']")
     private List<WebElement> allFoldersCheckboxes;
-    int numberOfFolders = allFoldersCheckboxes.size();
 
-    @FindBy(xpath= "//*[@id=\"fileList\"]/tr[2]//a[2]")
+    @FindBy(xpath = "//*[@id=\"fileList\"]/tr[2]//a[2]")
     private WebElement actionIcon;
 
-    @FindBy(xpath = "//span[text() = 'Add to favoites']")
+    @FindBy(xpath = "//span[text() = 'Add to favorites']")
     private WebElement addToFavorites;
 
     @FindBy(xpath = "//span[text() = 'Remove from favorites']")
     private WebElement removeFromFavorites;
 
+    @FindBy(xpath = "//a[text() = 'Favorites']")
+    private WebElement favoritesModule;
+
+    @FindBy(xpath = "//div[@id='app-content-favorites']//tbody[@id='fileList']/tr//span[@class = 'nametext']")
+    private List<WebElement> listOfNames_FavoriteFolders;
 
     public void clickOnPlusButton() {
         plusButton.click();
@@ -61,11 +66,11 @@ public class FilesPage {
         BrowserUtil.waitAlittle(2);
     }
 
-    public boolean isListContainFolder(String name){
+    public boolean isListContainFolder(String name) {
         boolean isContains = false;
         for (WebElement folder : listOfFolders) {
             System.out.println("folder.getText() = " + folder.getText());
-            if(folder.getText().equals(name)){
+            if (folder.getText().equals(name)) {
                 isContains = true;
                 break;
             }
@@ -74,17 +79,17 @@ public class FilesPage {
         return isContains;
     }
 
-    public void clickToselectAllFolders(){
+    public void clickToselectAllFolders() {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
         selectAllFoldersCheckBox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@for='select_all_files']")));
         selectAllFoldersCheckBox.click();
         BrowserUtil.waitAlittle(2);
     }
 
-    public boolean checkIfAllFoldersSelected(){
+    public boolean checkIfAllFoldersSelected() {
         boolean allSelected = true;
         for (WebElement checkbox : allFoldersCheckboxes) {
-            if(!checkbox.isSelected()){
+            if (!checkbox.isSelected()) {
                 allSelected = false;
                 break;
             }
@@ -93,18 +98,43 @@ public class FilesPage {
         return allSelected;
     }
 
+    // ---------------------   Add to Favorites feature methods -------------------------------
 
-    public void clickOnActionIcon() {
-        actionIcon.click();
+    public void clickOnActionOnspecificFolder(String nameOfFolder) {
+
+        WebElement actionOnaddedFolder = Driver.getDriver().findElement(By.xpath("//tr[@data-file='" + nameOfFolder + "']//a[2]"));
+        actionOnaddedFolder.click();
     }
 
-    public void clickAddToFavorites(){
+
+    public void clickAddToFavorites() {
         addToFavorites.click();
     }
 
-    public void removeFolderFromFavorites(){
-        removeFromFavorites.click();
+
+    public void clickOnFavoritesModule() {
+        favoritesModule.click();
     }
 
+    public boolean checkIfFavoritesListContainAddedFolder(String folderName) {
+
+        boolean isContain = false;
+        for (WebElement eachName : listOfNames_FavoriteFolders) {
+
+            if (eachName.getText().equals(folderName)) {
+                System.out.println("eachName = " + eachName.getText());
+
+                isContain = true;
+                WebElement actionOnaddedFolder = Driver.getDriver().findElement(By.xpath("//*[@id=\"fileList\"]/tr[@data-file = '" + folderName + "']/td[1]/a/span[3]/a[2]"));
+                actionOnaddedFolder.click();
+
+                removeFromFavorites.click();
+                break;
+            }
+
+        }
+
+        return isContain;
+    }
 
 }
