@@ -40,14 +40,13 @@ public class FielsPageStepDefs {
         System.out.println("Do assertions here");
 
 
-
     }
 
 
     @And("click on checkbox for selecting all folders")
     public void clickOnCheckboxForSelectingAllFolders() {
         //BrowserUtil.waitAlittle(2);
-filesPage.clickToselectAllFolders();
+        filesPage.clickToselectAllFolders();
 
     }
 
@@ -63,21 +62,30 @@ filesPage.clickToselectAllFolders();
     /*
     next scope of methods is related to "Add to favorites"
      */
-
-    @And("User click on Action icon")
-    public void userClickOnActionIcon() {
-        filesPage.clickOnActionIcon();
+String folder ;
+    @And("User click on Action icon on {string} folder")
+    public void userClickOnActionIconOnFolder(String folderName) {
+        filesPage.clickOnActionOnspecificFolder(folderName);
+    folder = folderName;
+        System.out.println("folder = " + folder);
     }
 
     @And("User choose Add to favorites")
     public void userChooseAddToFavorites() {
+        BrowserUtil.waitAlittle(2);
+        filesPage.clickAddToFavorites();
     }
 
     @And("User click on favorites module on left side")
     public void userClickOnFavoritesModuleOnLeftSide() {
+filesPage.clickOnFavoritesModule();
+
     }
 
     @Then("User should be able to see chosen file in favorites")
     public void userShouldBeAbleToSeeChosenFileInFavorites() {
+   Assert.assertTrue(filesPage.checkIfFavoritesListContainAddedFolder(folder));
     }
+
+
 }

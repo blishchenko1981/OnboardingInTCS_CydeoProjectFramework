@@ -11,6 +11,7 @@ public class Hooks {
 
     @Before("@ui")
     public void setupDriver(){
+        Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
 
     }
