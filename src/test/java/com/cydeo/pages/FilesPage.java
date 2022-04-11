@@ -137,4 +137,43 @@ public class FilesPage {
         return isContain;
     }
 
+    // -----------  remove folder from Favorites  -------------------------
+
+
+    @FindBy(xpath = "//*[@id='fileList']/tr[1]/td[1]/a/span[3]/a[2]")
+    private WebElement firstFolderOnFavoritesPage;
+    @FindBy(xpath = "//*[@id=\"fileList\"]/tr[1]/td[1]/a/span[1]/span")
+    private WebElement firstNameOfFolder;
+
+    public String name;
+
+    public void removeFirstFolderFromFavorites() {
+        // before remove get name of the first folder
+        name = firstNameOfFolder.getText();
+
+        System.out.println("nameOfFirstFolder = " + name);
+
+        firstFolderOnFavoritesPage.click();
+
+        removeFromFavorites.click();
+        BrowserUtil.waitAlittle(1);
+    }
+
+
+    public boolean checkIfFileRemoved() {
+        Driver.getDriver().navigate().refresh();
+        BrowserUtil.waitAlittle(1);
+        boolean doesNotContain = true;
+
+        for (WebElement each : listOfNames_FavoriteFolders) {
+
+            if (each.getText().equals(name)) {
+                doesNotContain = false;
+                break;
+            }
+
+        }
+
+        return doesNotContain;
+    }
 }

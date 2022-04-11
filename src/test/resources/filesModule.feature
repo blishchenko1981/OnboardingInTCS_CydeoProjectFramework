@@ -39,9 +39,16 @@ Feature: As a user, I should be able to access to Files module
   @ui
   Scenario: user should be able to add file to Favorites
     When User click on "Files"
-    And User click on Action icon on "cassandra.hudson" folder
+    And User click on Action icon on "larry.labadie" folder
     And User choose Add to favorites
     And User click on favorites module on left side
     Then User should be able to see chosen file in favorites
+
+  @ui
+  Scenario: user should be able to remove File From favorites
+    When User click on "Files"
+    And User click on favorites module on left side
+    And User remove first file from Favorites
+    Then After reloading page files should be removed
 
 

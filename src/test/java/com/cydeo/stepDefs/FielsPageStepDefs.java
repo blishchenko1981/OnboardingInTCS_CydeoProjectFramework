@@ -62,11 +62,12 @@ public class FielsPageStepDefs {
     /*
     next scope of methods is related to "Add to favorites"
      */
-String folder ;
+    String folder;
+
     @And("User click on Action icon on {string} folder")
     public void userClickOnActionIconOnFolder(String folderName) {
         filesPage.clickOnActionOnspecificFolder(folderName);
-    folder = folderName;
+        folder = folderName;
         System.out.println("folder = " + folder);
     }
 
@@ -78,14 +79,29 @@ String folder ;
 
     @And("User click on favorites module on left side")
     public void userClickOnFavoritesModuleOnLeftSide() {
-filesPage.clickOnFavoritesModule();
+        filesPage.clickOnFavoritesModule();
 
     }
 
     @Then("User should be able to see chosen file in favorites")
     public void userShouldBeAbleToSeeChosenFileInFavorites() {
-   Assert.assertTrue(filesPage.checkIfFavoritesListContainAddedFolder(folder));
+        Assert.assertTrue(filesPage.checkIfFavoritesListContainAddedFolder(folder));
     }
 
 
+    // test remove folder from favorites
+
+    @And("User remove first file from Favorites")
+    public void userRemoveFirstFileFromFavorites() {
+
+        filesPage.removeFirstFolderFromFavorites();
+    }
+
+    @Then("After reloading page files should be removed")
+    public void afterReloadingPageFilesShouldBeRemoved() {
+
+        System.out.println("filesPage.checkIfFileRemoved() = " + filesPage.checkIfFileRemoved());
+        Assert.assertTrue(filesPage.checkIfFileRemoved());
+
+    }
 }
