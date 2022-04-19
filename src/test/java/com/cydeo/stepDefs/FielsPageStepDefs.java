@@ -104,4 +104,11 @@ public class FielsPageStepDefs {
         Assert.assertTrue(filesPage.checkIfFileRemoved());
 
     }
+
+
+
+    @Then("user should be able to see file displayed on the page")
+    public void userShouldBeAbleToSeeFileDisplayedOnThePage() {
+
+    }
 }

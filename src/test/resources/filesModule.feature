@@ -51,4 +51,10 @@ Feature: As a user, I should be able to access to Files module
     And User remove first file from Favorites
     Then After reloading page files should be removed
 
+    Scenario: user should be able to upload file directly to the home page
+    When User click on "Files"
+    And Click on Upload file ""C:\Users\Vitalii\Desktop\ToscaManual\Session1_ FolderStructure,Scanner.pdf""
+    Then user should be able to see file displayed on the page
+
+
 

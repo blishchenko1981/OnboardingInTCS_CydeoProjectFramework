@@ -176,4 +176,28 @@ public class FilesPage {
 
         return doesNotContain;
     }
+
+
+    // --------------- Upload file function ------------------------------
+
+    //span[contains(@class, 'add')]
+
+    @FindBy(xpath = "//span[contains(@class, 'add')]")
+    private WebElement uploadFileButton;
+
+    @FindBy(xpath = "//div[@class='hiddenuploadfield']")
+    private WebElement hiddenUploadField;
+
+    public void uploadFile(String pathToFile){
+        uploadFileButton.click();
+        hiddenUploadField.sendKeys(pathToFile);
+    }
+
+
+
+
+
+
+
+
 }
