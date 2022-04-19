@@ -107,8 +107,21 @@ public class FielsPageStepDefs {
 
 
 
-    @Then("user should be able to see file displayed on the page")
-    public void userShouldBeAbleToSeeFileDisplayedOnThePage() {
+
+    @And("Click on Upload file {string}")
+    public void clickOnUploadFile(String pathToFile) {
+
+        filesPage.uploadFile(pathToFile);
+    }
+
+    @Then("user should be able to see file {string} displayed on the page")
+    public void userShouldBeAbleToSeeFileDisplayedOnThePage(String fileName) {
+
+        System.out.println("filesPage.isDisplayed(fileName) = " + filesPage.isDisplayed(fileName));
+        Assert.assertTrue(filesPage.isDisplayed(fileName));
+
+        // delete file to be able upload it next time:
+        filesPage.deleteFile(fileName);
 
     }
 }

@@ -43,6 +43,9 @@ public class FilesPage {
     @FindBy(xpath = "//span[text() = 'Add to favorites']")
     private WebElement addToFavorites;
 
+    @FindBy(xpath = "//span[text() = 'Delete file']")
+    private WebElement deleteFileAction;
+
     @FindBy(xpath = "//span[text() = 'Remove from favorites']")
     private WebElement removeFromFavorites;
 
@@ -185,19 +188,42 @@ public class FilesPage {
     @FindBy(xpath = "//span[contains(@class, 'add')]")
     private WebElement uploadFileButton;
 
-    @FindBy(xpath = "//div[@class='hiddenuploadfield']")
+    @FindBy(xpath = "//input[@id='file_upload_start']")
     private WebElement hiddenUploadField;
 
-    public void uploadFile(String pathToFile){
-        uploadFileButton.click();
+    public void uploadFile(String pathToFile) {
+
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='file_upload_start']")));
         hiddenUploadField.sendKeys(pathToFile);
     }
 
 
+    public boolean isDisplayed(String nameOfFile) {
+
+        boolean isDisplayed = false;
+        BrowserUtil.waitAlittle(3);
+        for (WebElement each : listOfFolders) {
+            System.out.println("each.getText() = " + each.getText());
+            if (each.getText().startsWith(nameOfFile)) {
+                isDisplayed =  true;
+
+            }
+        }
+        return isDisplayed;
+    }
 
 
+    // ________________________ delete File from page by the name __________________
+
+    public void deleteFile(String name){
+
+        WebElement actionOnFile = Driver.getDriver().findElement(By.xpath("//tr[starts-with(@data-file, 'Session')]//a[2]"));
+        actionOnFile.click();
+        deleteFileAction.click();
 
 
-
+    }
 
 }
+
