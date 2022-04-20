@@ -37,8 +37,6 @@ public class FielsPageStepDefs {
 
         Assert.assertTrue(filesPage.isListContainFolder(folderName));
 
-        System.out.println("Do assertions here");
-
 
     }
 
@@ -67,6 +65,7 @@ public class FielsPageStepDefs {
     @And("User click on Action icon on {string} folder")
     public void userClickOnActionIconOnFolder(String folderName) {
         filesPage.clickOnActionOnspecificFolder(folderName);
+        BrowserUtil.waitAlittle(2);
         folder = folderName;
         System.out.println("folder = " + folder);
     }
