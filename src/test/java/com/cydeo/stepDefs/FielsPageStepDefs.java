@@ -154,4 +154,29 @@ public class FielsPageStepDefs {
 
         Assert.assertTrue(filesPage.deletedFileIsDisplayed());
     }
+
+    // ------------------- verify can write the comments -----------------------------------
+    @And("User click on Action icon on second  folder")
+    public void userClickOnActionIconOnSecondFolder() {
+        filesPage.clickOnSecondFolderActionIcon();
+    }
+
+
+    @And("click on details")
+    public void clickOnDetails() {
+filesPage.clickOnDetails();
+    }
+
+    @And("Write a comment {string} inside to the input box and submit it")
+    public void writeACommentInsideToTheInputBoxAndSubmitIt(String comment) {
+
+        filesPage.createComment(comment);
+    }
+
+    @Then("Verify the comment is displayed in the comment section")
+    public void verifyTheCommentIsDisplayedInTheCommentSection() {
+
+        BrowserUtil.waitAlittle(4);
+        filesPage.verifyNewCommentWasCreated();
+    }
 }
