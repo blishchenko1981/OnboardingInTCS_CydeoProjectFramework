@@ -37,15 +37,34 @@ public class FilesPage {
 
     @FindBy(xpath = "//tr//input[@type = 'checkbox'][@class='selectCheckBox checkbox']")
     private List<WebElement> allFoldersCheckboxes;
+// --------------- Action Module -----------------------------------------
 
     @FindBy(xpath = "//*[@id=\"fileList\"]/tr[2]//a[2]")
-    private WebElement actionIcon;
+    private WebElement actionIcon; // Second folder in the list
 
     @FindBy(xpath = "//span[text() = 'Add to favorites']")
     private WebElement addToFavorites;
 
     @FindBy(xpath = "//li[@class = ' action-delete-container']")
     private WebElement deleteFileAction;
+
+    @FindBy(xpath = "//li/div[@class='message']")
+    private List<WebElement> listOfComments;
+// -----------
+    @FindBy(xpath = "//span[text() = 'Details']")
+    private WebElement details;
+
+    @FindBy(xpath = "//a[@id='commentsTabView']")
+    private WebElement commentsToFolder;
+
+    @FindBy(xpath = "//div[@class='message']")
+    private WebElement commentsBox;
+
+    @FindBy(xpath = "//form[@class='newCommentForm']//input[@type = 'submit']")
+    private WebElement submitCommentButton;
+
+// -----------
+    // --------------------------------------------------------------------
 
     @FindBy(xpath = "//span[text() = 'Remove from favorites']")
     private WebElement removeFromFavorites;
@@ -277,6 +296,32 @@ WebElement lastDeletedFolder = Driver.getDriver().findElement(By.xpath("//*[@id=
         System.out.println("lastDeletedFolder.getAttribute(\"data-path\") = " + lastDeletedFolder.getAttribute("data-path"));
         return lastDeletedFolder.getAttribute("data-path").equals(nameOfFirstFolder);
 //*[@id="fileList"]/tr[1]
+    }
+
+    public void clickOnSecondFolderActionIcon(){
+        actionIcon.click();
+    }
+
+    public void clickOnDetails(){
+        details.click();
+    }
+
+public String newComment;
+    public void createComment(String comment) {
+        newComment = comment;
+        commentsToFolder.click();
+        commentsBox.sendKeys(comment);
+        submitCommentButton.click();
+    }
+
+
+    public boolean verifyNewCommentWasCreated(){
+
+        boolean isCommentPresented = false ;
+
+        if(listOfComments.get(0).getText().equals(newComment)){isCommentPresented = true;}
+        System.out.println("listOfComments.get(0).getText() = " + listOfComments.get(0).getText());
+        return isCommentPresented;
     }
 }
 

@@ -67,12 +67,22 @@ Feature: As a user, I should be able to access to Files module
     Then Should be able to upload file in new folder "C:\Users\Vitalii\Desktop\IntelliJProjects\OnboardingInTCS_CydeoProjectFramework\src\test\resources\testData\Session1_ FolderStructure,Scanner.pdf"
     And user should be able to see file "Session1_" displayed on the page
 
-@ui
-    Scenario: User should be able to delete the folder/file
-      When User click on "Files"
-      And Click the action icon from any file
-      And Click deleted files on left buttom corner
-      Then Verify the deleted file is displayed on the page
+  @ui
+  Scenario: User should be able to delete the folder/file
+    When User click on "Files"
+    And Click the action icon from any file
+    And Click deleted files on left buttom corner
+    Then Verify the deleted file is displayed on the page
+
+  @ui
+  Scenario: verify users can write a comments to files/folders
+    When  User click on "Files"
+    And User click on Action icon on second  folder
+    And click on details
+    And Write a comment "Good Job!!!" inside to the input box and submit it
+    Then Verify the comment is displayed in the comment section
+
+
 
 
 
