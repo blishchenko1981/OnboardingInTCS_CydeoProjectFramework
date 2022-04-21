@@ -15,6 +15,7 @@ import java.util.List;
 
 public class FilesPage {
 
+
     public FilesPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
@@ -43,7 +44,7 @@ public class FilesPage {
     @FindBy(xpath = "//span[text() = 'Add to favorites']")
     private WebElement addToFavorites;
 
-    @FindBy(xpath = "//span[text() = 'Delete file']")
+    @FindBy(xpath = "//li[@class = ' action-delete-container']")
     private WebElement deleteFileAction;
 
     @FindBy(xpath = "//span[text() = 'Remove from favorites']")
@@ -145,6 +146,7 @@ public class FilesPage {
 
     @FindBy(xpath = "//*[@id='fileList']/tr[1]/td[1]/a/span[3]/a[2]")
     private WebElement firstFolderOnFavoritesPage;
+
     @FindBy(xpath = "//*[@id=\"fileList\"]/tr[1]/td[1]/a/span[1]/span")
     private WebElement firstNameOfFolder;
 
@@ -206,17 +208,25 @@ public class FilesPage {
         for (WebElement each : listOfFolders) {
             System.out.println("each.getText() = " + each.getText());
             if (each.getText().startsWith(nameOfFile)) {
-                isDisplayed =  true;
+                isDisplayed = true;
 
             }
         }
         return isDisplayed;
     }
 
-
     // ________________________ delete File from page by the name __________________
 
-    public void deleteFile(String name){
+    @FindBy(xpath = "//a[text() = 'Deleted files']")
+    private WebElement deletedFilesLink;
+
+    @FindBy(xpath = "//a[@id = 'modified']/span[text() = 'Deleted']")
+    private WebElement sortDeletedFilesByTime;
+
+    @FindBy(xpath = "//tbody[@id='fileList']/tr[1]")
+    private WebElement firstDeletedFolder;
+
+    public void deleteFile(String name) {
 
         WebElement actionOnFile = Driver.getDriver().findElement(By.xpath("//tr[starts-with(@data-file, 'Session')]//a[2]"));
         actionOnFile.click();
@@ -225,5 +235,48 @@ public class FilesPage {
 
     }
 
+    public void cickOnFolder(String folderName) {
+
+        WebElement folder = Driver.getDriver().findElement(By.xpath("//tr[@data-file='" + folderName + "']"));
+        folder.click();
+        BrowserUtil.waitAlittle(3);
+
+
+    }
+
+    // check if deleted file appears on "Deleted files" folder
+    //1. Delete first folder:
+    String nameOfFirstFolder;
+
+    public void deleteSecondFolder() {
+        // get name of the first folder that will be deleted
+
+        WebElement nameFirstFolder = Driver.getDriver().findElement(By.xpath("//tr[2]//span[@class='nametext']"));
+        nameOfFirstFolder = nameFirstFolder.getText();
+        actionIcon.click();
+        BrowserUtil.waitAlittle(2);
+
+        deleteFileAction.click();
+    }
+
+    public void clickOnDeletedFilesLink() {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[text() = 'Deleted files']")));
+        deletedFilesLink.click();
+        BrowserUtil.waitAlittle(3);
+        sortDeletedFilesByTime.click();
+        sortDeletedFilesByTime.click();
+        BrowserUtil.waitAlittle(3);
+    }
+
+
+    public boolean deletedFileIsDisplayed() {
+        System.out.println("nameOfFirstFolder = " + nameOfFirstFolder);
+
+WebElement lastDeletedFolder = Driver.getDriver().findElement(By.xpath("//*[@id='fileList']/tr[starts-with (@data-path,'" + nameOfFirstFolder + "')]"));
+        System.out.println("lastDeletedFolder.getAttribute(\"data-path\") = " + lastDeletedFolder.getAttribute("data-path"));
+        return lastDeletedFolder.getAttribute("data-path").equals(nameOfFirstFolder);
+//*[@id="fileList"]/tr[1]
+    }
 }
 

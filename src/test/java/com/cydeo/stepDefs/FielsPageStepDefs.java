@@ -105,8 +105,6 @@ public class FielsPageStepDefs {
     }
 
 
-
-
     @And("Click on Upload file {string}")
     public void clickOnUploadFile(String pathToFile) {
 
@@ -116,11 +114,44 @@ public class FielsPageStepDefs {
     @Then("user should be able to see file {string} displayed on the page")
     public void userShouldBeAbleToSeeFileDisplayedOnThePage(String fileName) {
 
+
         System.out.println("filesPage.isDisplayed(fileName) = " + filesPage.isDisplayed(fileName));
         Assert.assertTrue(filesPage.isDisplayed(fileName));
 
         // delete file to be able upload it next time:
         filesPage.deleteFile(fileName);
 
+    }
+
+    //------------------ upload file to the new folder --------
+    @And("click on new folder")
+    public void clickOnNewFolder() {
+        filesPage.cickOnFolder(folderName);
+        BrowserUtil.waitAlittle(2);
+    }
+
+
+    @Then("Should be able to upload file in new folder {string}")
+    public void shouldBeAbleToUploadFileInNewFolder(String path) {
+
+        filesPage.uploadFile(path);
+        BrowserUtil.waitAlittle(2);
+    }
+
+    @And("Click the action icon from any file")
+    public void clickTheActionIconFromAnyFile() {
+        filesPage.deleteSecondFolder();
+
+    }
+
+    @And("Click deleted files on left buttom corner")
+    public void clickDeletedFilesOnLeftButtomCorner() {
+        filesPage.clickOnDeletedFilesLink();
+    }
+
+    @Then("Verify the deleted file is displayed on the page")
+    public void verifyTheDeletedFileIsDisplayedOnThePage() {
+
+        Assert.assertTrue(filesPage.deletedFileIsDisplayed());
     }
 }
