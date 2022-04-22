@@ -67,7 +67,7 @@ Feature: As a user, I should be able to access to Files module
     Then Should be able to upload file in new folder "C:\Users\Vitalii\Desktop\IntelliJProjects\OnboardingInTCS_CydeoProjectFramework\src\test\resources\testData\Session1_ FolderStructure,Scanner.pdf"
     And user should be able to see file "Session1_" displayed on the page
 
-  @ui
+
   Scenario: User should be able to delete the folder/file
     When User click on "Files"
     And Click the action icon from any file
