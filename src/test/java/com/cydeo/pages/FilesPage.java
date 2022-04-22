@@ -50,7 +50,7 @@ public class FilesPage {
 
     @FindBy(xpath = "//li/div[@class='message']")
     private List<WebElement> listOfComments;
-// -----------
+    // -----------
     @FindBy(xpath = "//span[text() = 'Details']")
     private WebElement details;
 
@@ -292,21 +292,22 @@ public class FilesPage {
     public boolean deletedFileIsDisplayed() {
         System.out.println("nameOfFirstFolder = " + nameOfFirstFolder);
 
-WebElement lastDeletedFolder = Driver.getDriver().findElement(By.xpath("//*[@id='fileList']/tr[starts-with (@data-path,'" + nameOfFirstFolder + "')]"));
+        WebElement lastDeletedFolder = Driver.getDriver().findElement(By.xpath("//*[@id='fileList']/tr[starts-with (@data-path,'" + nameOfFirstFolder + "')]"));
         System.out.println("lastDeletedFolder.getAttribute(\"data-path\") = " + lastDeletedFolder.getAttribute("data-path"));
         return lastDeletedFolder.getAttribute("data-path").equals(nameOfFirstFolder);
 //*[@id="fileList"]/tr[1]
     }
 
-    public void clickOnSecondFolderActionIcon(){
+    public void clickOnSecondFolderActionIcon() {
         actionIcon.click();
     }
 
-    public void clickOnDetails(){
+    public void clickOnDetails() {
         details.click();
     }
 
-public String newComment;
+    public String newComment;
+
     public void createComment(String comment) {
         newComment = comment;
         commentsToFolder.click();
@@ -315,13 +316,97 @@ public String newComment;
     }
 
 
-    public boolean verifyNewCommentWasCreated(){
+    public boolean verifyNewCommentWasCreated() {
 
-        boolean isCommentPresented = false ;
+        boolean isCommentPresented = false;
 
-        if(listOfComments.get(0).getText().equals(newComment)){isCommentPresented = true;}
+        if (listOfComments.get(0).getText().equals(newComment)) {
+            isCommentPresented = true;
+        }
         System.out.println("listOfComments.get(0).getText() = " + listOfComments.get(0).getText());
         return isCommentPresented;
     }
+
+
+    // ---------------------  test Settings function --------------------------------------
+    @FindBy(xpath = "//button[normalize-space(.) = 'Settings']")
+    private WebElement settingsBtn;
+
+    // ----- Settings functions ------
+    @FindBy(xpath = "//div[@id='app-settings-content']//div//label")
+    //div[@id = 'app-settings-content']//input[@type = 'checkbox']
+    private List<WebElement> listOfcheckboxesInSettings;
+
+    @FindBy(xpath = "//div[@id='files-setting-richworkspace']//label")
+    private WebElement showRichWorkspaces;
+
+    @FindBy(xpath = "//div[@id='recommendations-setting-enabled']//label")
+    private WebElement showRecommendeations;
+
+    @FindBy(xpath = "//div[@id='files-setting-showhidden']//label")
+    private WebElement showHiddenFiles;
+
+
+    @FindBy(xpath = "//div[@id='rich-workspace']")
+    private List<WebElement> richWorkspace;
+    @FindBy(xpath = "//div[@id='recommendations']")
+    private List<WebElement> recommendations;
+    @FindBy(xpath = "//div[@class='viewcontainer has-comments has-selection']")
+    private List<WebElement> hiddenFiles;
+
+    public void clickOnSettings() {
+        settingsBtn.click();
+        BrowserUtil.waitAlittle(1);
+    }
+
+    public void clickOneachBox() {
+        for (WebElement each : listOfcheckboxesInSettings) {
+            each.click();
+            BrowserUtil.waitAlittle(1);
+            System.out.println("each.getText() = " + each.getText());
+            System.out.println("richWorkspace.isDisplayed() = " + richWorkspace.isEmpty());
+        }
+    }
+
+    public boolean isUserAbleToChangeSettings() {
+        // ----------------------- Check RichWorkspace checkbox ----------------------------------
+        boolean isSelectedrichWorkspace = false;
+
+        if (richWorkspace.isEmpty()) {
+            showRichWorkspaces.click();
+            isSelectedrichWorkspace = richWorkspace.get(0).isDisplayed();
+        } else {
+            showRichWorkspaces.click();
+            isSelectedrichWorkspace = richWorkspace.isEmpty();
+
+        }
+        System.out.println("isSelectedrichWorkspace = " + isSelectedrichWorkspace);
+        //------------------------  Check recommendations   ----------------------------------
+        boolean isSelectedRecomendations = false;
+        if (recommendations.isEmpty()) {
+            showRecommendeations.click();
+            isSelectedRecomendations = recommendations.get(0).isDisplayed();
+        } else {
+            showRecommendeations.click();
+            isSelectedRecomendations = recommendations.isEmpty();
+
+        }
+        System.out.println("isSelectedRecomendations = " + isSelectedRecomendations);
+        //---------------------- Check HiddenFiles --------------------------------
+        boolean isSelectedHiddenFiles = false;
+        if (hiddenFiles.isEmpty()) {
+            showHiddenFiles.click();
+            isSelectedHiddenFiles = hiddenFiles.get(0).isDisplayed();
+        } else {
+            showHiddenFiles.click();
+            isSelectedHiddenFiles = hiddenFiles.isEmpty();
+
+        }
+        System.out.println("isSelectedHiddenFiles = " + isSelectedHiddenFiles);
+        return isSelectedrichWorkspace && isSelectedRecomendations && isSelectedHiddenFiles;
+
+    }
+
+
 }
 
