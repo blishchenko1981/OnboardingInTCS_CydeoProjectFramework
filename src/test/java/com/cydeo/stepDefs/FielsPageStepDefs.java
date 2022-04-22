@@ -179,4 +179,17 @@ filesPage.clickOnDetails();
         BrowserUtil.waitAlittle(4);
         filesPage.verifyNewCommentWasCreated();
     }
+
+    @And("User click on settings link")
+    public void userClickOnSettingsLink() {
+        filesPage.clickOnSettings();
+    }
+
+    @Then("User should be able to select all three options")
+    public void userShouldBeAbleToSelectAllThreeOptions() {
+        System.out.println("Verify clicks on settings");
+     //   filesPage.clickOneachBox();
+
+        Assert.assertTrue(filesPage.isUserAbleToChangeSettings());
+    }
 }
