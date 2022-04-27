@@ -2,11 +2,14 @@ package com.cydeo.stepDefs;
 
 import com.cydeo.pages.FilesPage;
 import com.cydeo.utility.BrowserUtil;
+import com.cydeo.utility.Driver;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.interactions.Actions;
 
 public class FielsPageStepDefs {
 
@@ -191,5 +194,23 @@ filesPage.clickOnDetails();
      //   filesPage.clickOneachBox();
 
         Assert.assertTrue(filesPage.isUserAbleToChangeSettings());
+    }
+
+    @And("refresh the page")
+    public void refreshThePage() {
+
+        filesPage.refreshFilePage();
+    }
+
+    @Then("verify the storage usage is increased after upload file {string}")
+    public void verifyTheSorageUsageIsIncreased(String fileName) {
+        Assert.assertTrue(filesPage.isStorageChanged());
+
+
+    }
+
+    @And("delete file {string}")
+    public void deleteFile(String name) {
+        filesPage.deleteFile(name);
     }
 }

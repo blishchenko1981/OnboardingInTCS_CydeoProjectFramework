@@ -3,11 +3,15 @@ package com.cydeo.pages;
 import com.cydeo.utility.BrowserUtil;
 import com.cydeo.utility.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.devtools.v97.log.Log;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import javax.swing.text.Utilities;
 import java.util.Collections;
@@ -247,8 +251,18 @@ public class FilesPage {
 
     public void deleteFile(String name) {
 
-        WebElement actionOnFile = Driver.getDriver().findElement(By.xpath("//tr[starts-with(@data-file, 'Session')]//a[2]"));
-        actionOnFile.click();
+
+
+
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("window.scrollTo(0,1000)");
+
+
+        WebElement actionsButton = Driver.getDriver().findElement(By.xpath("//tr[starts-with(@data-file, '" + name + "')]//a[2]"));
+
+        actionsButton.click();
+
+        BrowserUtil.waitAlittle(2);
         deleteFileAction.click();
 
 
@@ -407,6 +421,40 @@ public class FilesPage {
 
     }
 
+    //-----------------------  Get text from any element ----------------------
+    public String getTextFromElement(WebElement element) {
+        String text = "";
+        try {
+            text = element.getText();
+        } catch (Exception e) {
 
+            System.out.println("e.toString() = " + e.toString());
+        }
+        return text;
+    }
+
+    // -------------------------  Check Storage Usage __-------------------------
+    @FindBy(xpath = "//p[contains(text(),' used')]")
+    public WebElement storageUsage;
+
+    public String storageUsageBeforeUpload;
+
+
+    public void refreshFilePage() {
+        BrowserUtil.waitAlittle(7);
+        storageUsageBeforeUpload = getTextFromElement(storageUsage);
+        System.out.println("storageUsageBeforeUpload = " + storageUsageBeforeUpload);
+        Driver.getDriver().navigate().refresh();
+    }
+
+    public boolean isStorageChanged() {
+        BrowserUtil.waitAlittle(2);
+        String storageUsageAfterUploadFile = getTextFromElement(storageUsage);
+        System.out.println("storageUsageAfterUploadFile = " + storageUsageAfterUploadFile);
+        boolean isChanged = !storageUsageAfterUploadFile.equals(storageUsageBeforeUpload);
+
+        System.out.println("isChanged = " + isChanged);
+        return isChanged;
+    }
 }
 

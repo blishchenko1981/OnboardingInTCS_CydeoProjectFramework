@@ -9,8 +9,11 @@ Feature: User should be able to use all main page
     When User click on "Files"
     And User click on settings link
     Then User should be able to select all three options
-    
-    @ui
-    Scenario: User should be able to see the app storage usage
-      When User click on "Files"
-      And Click on Upload file "C:\Users\Vitalii\Desktop\IntelliJProjects\OnboardingInTCS_CydeoProjectFramework\src\test\resources\testData\Session1_ FolderStructure,Scanner.pdf"
+
+  @ui
+  Scenario: User should be able to see the app storage usage
+    When User click on "Files"
+    And Click on Upload file "C:\Users\Vitalii\Desktop\IntelliJProjects\OnboardingInTCS_CydeoProjectFramework\src\test\resources\testData\Session1_ FolderStructure,Scanner.pdf"
+    And refresh the page
+    Then verify the storage usage is increased after upload file "Session"
+    And delete file "Session"
