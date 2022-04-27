@@ -55,7 +55,7 @@ Feature: As a user, I should be able to access to Files module
   Scenario: user should be able to upload file directly to the home page
     When User click on "Files"
     And Click on Upload file "C:\Users\Vitalii\Desktop\IntelliJProjects\OnboardingInTCS_CydeoProjectFramework\src\test\resources\testData\Session1_ FolderStructure,Scanner.pdf"
-    Then user should be able to see file "Session1_" displayed on the page
+    Then user should be able to see file "Sessio" displayed on the page
 
   @ui
   Scenario: User should be able to upload file in a new folder
