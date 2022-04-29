@@ -5,16 +5,12 @@ import com.cydeo.utility.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.v97.log.Log;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-import javax.swing.text.Utilities;
-import java.util.Collections;
 import java.util.List;
 
 public class FilesPage {
@@ -30,6 +26,10 @@ public class FilesPage {
     private WebElement createNewFolderButton;
     @FindBy(id = "view13-input-folder")
     private WebElement nameForNewFolder;
+
+    @FindBy(xpath = "//tbody[@id='fileList']/tr[2]//span[@class = 'innernametext']" )
+    private WebElement nameOfSecondFolder;
+
     @FindBy(xpath = "//form[@class='filenameform']/input[@type='submit']")
     private WebElement submitNewFolderCreation;
 
@@ -44,9 +44,9 @@ public class FilesPage {
 // --------------- Action Module -----------------------------------------
 
     @FindBy(xpath = "//*[@id=\"fileList\"]/tr[2]//a[2]")
-    private WebElement actionIcon; // Second folder in the list
+    private WebElement actionIconSecondFolder; // Second folder in the list
 
-    @FindBy(xpath = "//span[text() = 'Add to favorites']")
+    @FindBy(xpath = "//li[@class=' action-favorite-container']//span[2]")
     private WebElement addToFavorites;
 
     @FindBy(xpath = "//li[@class = ' action-delete-container']")
@@ -70,7 +70,7 @@ public class FilesPage {
 // -----------
     // --------------------------------------------------------------------
 
-    @FindBy(xpath = "//span[text() = 'Remove from favorites']")
+    @FindBy(xpath = "//li[@class=' action-favorite-container']//span[2]")
     private WebElement removeFromFavorites;
 
     @FindBy(xpath = "//a[text() = 'Favorites']")
@@ -127,35 +127,45 @@ public class FilesPage {
 
     // ---------------------   Add to Favorites feature methods -------------------------------
 
-    public void clickOnActionOnspecificFolder(String nameOfFolder) {
+public String getTestFromSecondFolder(){
+    System.out.println("nameOfSecondFolder.getText() = " + nameOfSecondFolder.getText());
+    return nameOfSecondFolder.getText();
+}
 
-        WebElement actionOnaddedFolder = Driver.getDriver().findElement(By.xpath("//tr[@data-file='" + nameOfFolder + "']//a[2]"));
-        actionOnaddedFolder.click();
+    public void clickOnActionOnSecondFolder() {
+        actionIconSecondFolder.click();
+        System.out.println("Favorite status - " + addToFavorites.getText());
+
     }
 
 
     public void clickAddToFavorites() {
+        if (!addToFavorites.getText().contains("Add")) {
+            removeFromFavorites.click();
+            BrowserUtil.waitAlittle(1);
+            actionIconSecondFolder.click();
+        }else{
+            BrowserUtil.waitAlittle(1);
         addToFavorites.click();
+        BrowserUtil.waitAlittle(1);}
     }
 
 
     public void clickOnFavoritesModule() {
         favoritesModule.click();
+        BrowserUtil.waitAlittle(1);
     }
 
     public boolean checkIfFavoritesListContainAddedFolder(String folderName) {
 
         boolean isContain = false;
         for (WebElement eachName : listOfNames_FavoriteFolders) {
+            System.out.println("eachName = " + eachName.getText());
 
             if (eachName.getText().equals(folderName)) {
-                System.out.println("eachName = " + eachName.getText());
 
                 isContain = true;
                 WebElement actionOnaddedFolder = Driver.getDriver().findElement(By.xpath("//*[@id=\"fileList\"]/tr[@data-file = '" + folderName + "']/td[1]/a/span[3]/a[2]"));
-                actionOnaddedFolder.click();
-
-                removeFromFavorites.click();
                 break;
             }
 
@@ -286,7 +296,7 @@ public class FilesPage {
 
         WebElement nameFirstFolder = Driver.getDriver().findElement(By.xpath("//tr[2]//span[@class='nametext']"));
         nameOfFirstFolder = nameFirstFolder.getText();
-        actionIcon.click();
+        actionIconSecondFolder.click();
         BrowserUtil.waitAlittle(2);
 
         deleteFileAction.click();
@@ -312,9 +322,7 @@ public class FilesPage {
 //*[@id="fileList"]/tr[1]
     }
 
-    public void clickOnSecondFolderActionIcon() {
-        actionIcon.click();
-    }
+
 
     public void clickOnDetails() {
         details.click();

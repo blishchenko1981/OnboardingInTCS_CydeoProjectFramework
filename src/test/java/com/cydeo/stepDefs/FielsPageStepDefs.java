@@ -2,14 +2,11 @@ package com.cydeo.stepDefs;
 
 import com.cydeo.pages.FilesPage;
 import com.cydeo.utility.BrowserUtil;
-import com.cydeo.utility.Driver;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.interactions.Actions;
 
 public class FielsPageStepDefs {
 
@@ -65,14 +62,14 @@ public class FielsPageStepDefs {
      */
     String folder;
 
-    @And("User click on Action icon on {string} folder")
-    public void userClickOnActionIconOnFolder(String folderName) {
-        filesPage.clickOnActionOnspecificFolder(folderName);
+    @And("User click on Action icon on second folder")
+    public void userClickOnActionIconOnSecondFolder() {
+        filesPage.clickOnActionOnSecondFolder();
         BrowserUtil.waitAlittle(2);
-        folder = folderName;
+        folder = filesPage.getTestFromSecondFolder();
         System.out.println("folder = " + folder);
     }
-
+//-------- WIP
     @And("User choose Add to favorites")
     public void userChooseAddToFavorites() {
         BrowserUtil.waitAlittle(2);
@@ -82,6 +79,7 @@ public class FielsPageStepDefs {
     @And("User click on favorites module on left side")
     public void userClickOnFavoritesModuleOnLeftSide() {
         filesPage.clickOnFavoritesModule();
+        BrowserUtil.waitAlittle(2);
 
     }
 
@@ -159,10 +157,7 @@ public class FielsPageStepDefs {
     }
 
     // ------------------- verify can write the comments -----------------------------------
-    @And("User click on Action icon on second  folder")
-    public void userClickOnActionIconOnSecondFolder() {
-        filesPage.clickOnSecondFolderActionIcon();
-    }
+
 
 
     @And("click on details")
