@@ -2,12 +2,14 @@ package com.cydeo.pages;
 
 import com.cydeo.utility.BrowserUtil;
 import com.cydeo.utility.Driver;
+import io.cucumber.java.en.And;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.swing.text.JTextComponent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,16 @@ public class HomePage {
 
     @FindBy(xpath = "//li[@tabindex = '-1']/a")
     private List<WebElement> mainModules;
+
+
+    @FindBy(xpath = "//input[@type = 'text']")
+    private WebElement userSearchBox;
+
+    @FindBy(xpath = "//ul[@class = 'app-navigation__list']//li[2]")
+    private WebElement secondUserOnTalk;
+
+    @FindBy(xpath = "//div[starts-with (@placeholder,'Write message')]")
+    private WebElement textBox;
 
     public boolean checkNamesOfModules(List<String> expectedList){
         List<String> moduleNames = new ArrayList<>();
@@ -106,5 +118,15 @@ public class HomePage {
     public boolean isTitle_Talk() {
         System.out.println("getTitle() = " + Driver.getDriver().getTitle());
         return Driver.getDriver().getTitle().startsWith("Talk");
+    }
+    // -------------   userSearch Box in Taks --------------------------
+
+    public void clickOnSecondUser() {
+        secondUserOnTalk.click();
+    }
+
+
+    public void writeMessage() {
+        textBox.sendKeys("Hello my friend !!!");
     }
 }
