@@ -24,7 +24,7 @@ public class HomePage {
     private WebElement module_Photos;
     @FindBy(xpath = "//li[@data-id = 'activity']")
     private WebElement module_Activity;
-    @FindBy(xpath = "//li[@data-id = 'talk']")
+    @FindBy(xpath = "//li[@data-id = 'spreed']")
     private WebElement module_Talk;
     @FindBy(xpath = "//li[@data-id = 'mail']")
     private WebElement module_Mail;
@@ -101,5 +101,10 @@ public class HomePage {
 
         }
 
+    }
+
+    public boolean isTitle_Talk() {
+        System.out.println("getTitle() = " + Driver.getDriver().getTitle());
+        return Driver.getDriver().getTitle().startsWith("Talk");
     }
 }

@@ -4,7 +4,7 @@ Feature: User should be able to use all main page
     Given User  on the login page
     When User provide correct credentials
 
-
+@ui
   Scenario: User should be able to change settings
     When User click on "Files"
     And User click on settings link

@@ -38,4 +38,10 @@ public class HomePageStepDefs {
         String actualtitle = Driver.getDriver().getTitle();
         Assert.assertEquals(expectedTitle, actualtitle);
     }
+
+    @Then("Tab name should start with Talk")
+    public void tabNameShouldStartWithTalk() {
+
+        Assert.assertTrue(homePage.isTitle_Talk());
+    }
 }

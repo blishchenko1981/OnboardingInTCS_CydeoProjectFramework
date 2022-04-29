@@ -19,4 +19,14 @@ Feature: All main modules should be placed correctly in right order
       | Calendar  |
       | Deck      |
 
+    @ui @us11
+      Scenario: User should be able to see talk page after clicking on Talk module
+
+      Given User  on the login page
+      And User provide correct credentials
+      And Click submit button
+      When User click on "Talk"
+      Then Tab name should start with Talk
+
+
 
