@@ -3,9 +3,12 @@ package com.cydeo.stepDefs;
 import com.cydeo.pages.HomePage;
 import com.cydeo.utility.BrowserUtil;
 import com.cydeo.utility.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
@@ -38,4 +41,26 @@ public class HomePageStepDefs {
         String actualtitle = Driver.getDriver().getTitle();
         Assert.assertEquals(expectedTitle, actualtitle);
     }
+
+    @Then("Tab name should start with Talk")
+    public void tabNameShouldStartWithTalk() {
+
+        Assert.assertTrue(homePage.isTitle_Talk());
+    }
+
+    @And("Search  a user from search box on the left")
+    public void searchAUserFromSearchBoxOnTheLeft() {
+        homePage.clickOnSecondUser();
+    }
+
+    @And("Write a message and submit it")
+    public void writeAMessageAndSubmitIt() {
+        homePage.writeMessage();
+    }
+
+    @Then("Message should be displayed on the conversation log")
+    public void messageShouldBeDisplayedOnTheConversationLog() {
+        System.out.println("Write assertions here");
+    }
+
 }
