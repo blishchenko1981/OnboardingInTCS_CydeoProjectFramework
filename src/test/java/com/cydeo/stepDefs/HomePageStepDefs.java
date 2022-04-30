@@ -53,14 +53,15 @@ public class HomePageStepDefs {
         homePage.clickOnSecondUser();
     }
 
-    @And("Write a message and submit it")
-    public void writeAMessageAndSubmitIt() {
-        homePage.writeMessage();
+    @And("Write a message {string} and submit it")
+    public void writeAMessageAndSubmitIt(String text) {
+        homePage.writeMessage(text);
     }
 
-    @Then("Message should be displayed on the conversation log")
-    public void messageShouldBeDisplayedOnTheConversationLog() {
+    @Then("Message {string} should be displayed on the conversation log")
+    public void messageShouldBeDisplayedOnTheConversationLog(String text) {
         System.out.println("Write assertions here");
+        Assert.assertTrue(homePage.checkIfMessageDisplayed(text));
     }
 
 }

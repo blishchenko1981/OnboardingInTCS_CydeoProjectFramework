@@ -40,7 +40,6 @@ public class HomePage {
     private WebElement module_Deck;
 
 
-
     @FindBy(xpath = "//li[@tabindex = '-1']/a")
     private List<WebElement> mainModules;
 
@@ -54,16 +53,22 @@ public class HomePage {
     @FindBy(xpath = "//div[starts-with (@placeholder,'Write message')]")
     private WebElement textBox;
 
-    public boolean checkNamesOfModules(List<String> expectedList){
+    @FindBy(xpath = "//div[@class = 'message']")
+    private List<WebElement> listOfWrittenMessages;
+
+    @FindBy(xpath = "//button[@aria-label='Send message']")
+    private WebElement submitMessage;
+
+    public boolean checkNamesOfModules(List<String> expectedList) {
         List<String> moduleNames = new ArrayList<>();
         for (WebElement module : mainModules) {
-        moduleNames.add(module.getAttribute("aria-label"));
+            moduleNames.add(module.getAttribute("aria-label"));
         }
         return moduleNames.equals(expectedList);
     }
 
     public ArrayList<String> getMainModulesNames() {
-        ArrayList<String> namesList = new ArrayList<>() ;
+        ArrayList<String> namesList = new ArrayList<>();
 
         for (WebElement module : mainModules) {
             namesList.add(module.getAttribute("aria-label"));
@@ -81,7 +86,7 @@ public class HomePage {
     public void clickOnModule(String nameOfModule) {
 
         BrowserUtil.waitAlittle(2);
-        switch (nameOfModule){
+        switch (nameOfModule) {
 
             case "Files":
                 module_Files.click();
@@ -126,7 +131,24 @@ public class HomePage {
     }
 
 
-    public void writeMessage() {
-        textBox.sendKeys("Hello my friend !!!");
+    public void writeMessage(String text) {
+        textBox.sendKeys(text);
+        BrowserUtil.waitAlittle(3);
+        submitMessage.click();
     }
+
+    public boolean checkIfMessageDisplayed(String messageText) {
+BrowserUtil.waitAlittle(2);
+        boolean isMessageDisplayed = false;
+        for (WebElement message : listOfWrittenMessages) {
+            System.out.println("message.getText() = " + message.getText());
+            if (message.getText().contains(messageText)) {
+                isMessageDisplayed = true;
+                break;
+            }
+        }
+        return isMessageDisplayed;
+    }
+
+
 }
