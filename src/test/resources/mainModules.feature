@@ -33,6 +33,17 @@ Feature: All main modules should be placed correctly in right order
     And  Write a message "Hi everyone!!!" and submit it
     Then Message "Hi everyone!!!" should be displayed on the conversation log
 
+  @ui
+  Scenario: User should be able get use Contacts function
+    When User click on "Contacts"
+    Then User should be directed on the "Contacts" page
+
+  @ui @wip
+  Scenario: User should be able to create new contact
+    When User click on "Contacts"
+    And Click on New Contact button
+    And Fill out the contact info
+    Then User should be able to see contact name is added to the contact list
 
 
 

@@ -39,7 +39,7 @@ public class HomePageStepDefs {
     public void userShouldBeDirectedOnThePage(String expectedTitle) {
 
         String actualtitle = Driver.getDriver().getTitle();
-        Assert.assertEquals(expectedTitle, actualtitle);
+        Assert.assertTrue(actualtitle.contains(expectedTitle));
     }
 
     @Then("Tab name should start with Talk")
