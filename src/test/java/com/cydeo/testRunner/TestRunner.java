@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
                     "rerun:target/rerun.txt",
             },
             dryRun = false,
-            tags = "@smoke"
+            tags = "@ui"
     )
 
     public class TestRunner{}

@@ -266,6 +266,9 @@ public String getTestFromSecondFolder(){
 
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         js.executeScript("window.scrollTo(0,1000)");
+        js.executeScript("window.scrollTo(0,1000)");
+        js.executeScript("window.scrollTo(0,1000)");
+        js.executeScript("window.scrollTo(0,1000)");
 
 
         WebElement actionsButton = Driver.getDriver().findElement(By.xpath("//tr[starts-with(@data-file, '" + name + "')]//a[2]"));

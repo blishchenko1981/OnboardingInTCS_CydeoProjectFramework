@@ -1,4 +1,5 @@
-Feature: All main modules should be placed correctly in right order
+Feature: All main modules should work properly
+
 
   Dashboard, Files, Photos, Activity, Talk, Mail, Contacts, Circles, Calendar, Deck
 

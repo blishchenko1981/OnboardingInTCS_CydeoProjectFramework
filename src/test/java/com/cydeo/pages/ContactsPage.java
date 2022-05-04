@@ -65,6 +65,7 @@ public class ContactsPage {
 
     public boolean contactsListContainNewContact() {
         boolean isContain = false;
+        BrowserUtil.waitAlittle(1);
         for (WebElement element : contactsList) {
             if (element.getText().contains(newContactName)) {
                 isContain = true;

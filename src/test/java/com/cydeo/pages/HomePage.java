@@ -182,6 +182,7 @@ public class HomePage {
 
     public boolean fileAppearsOnSearchResults() {
         boolean isAppears = false;
+        BrowserUtil.waitAlittle(2);
         if(searchResult.getText().equals(recommendedFiles.get(1).getText())){
             isAppears = true;
 
