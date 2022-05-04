@@ -21,7 +21,7 @@ Feature: All main modules should be placed correctly in right order
       | Calendar  |
       | Deck      |
 
-  @ui @us11
+  @ui
   Scenario: User should be able to see talk page after clicking on Talk module
     When User click on "Talk"
     Then Tab name should start with Talk
@@ -38,12 +38,17 @@ Feature: All main modules should be placed correctly in right order
     When User click on "Contacts"
     Then User should be directed on the "Contacts" page
 
-  @ui @wip
+  @ui
   Scenario: User should be able to create new contact
     When User click on "Contacts"
     And Click on New Contact button
     And Fill out the contact info
     Then User should be able to see contact name is added to the contact list
+
+  @ui
+  Scenario: User should be able to see all contacts names on the screen
+    When User click on "Contacts"
+    Then List of contacts should be displayed on the screen
 
 
 

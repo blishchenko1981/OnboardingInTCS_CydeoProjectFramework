@@ -25,6 +25,9 @@ public class ContactPageStepDef {
         }
 
 
-
+    @Then("List of contacts should be displayed on the screen")
+    public void listOfContactsShouldBeDisplayedOnTheScreen() {
+            Assert.assertTrue(contactPage.listOfContactsDisplayed());
     }
+}
 

@@ -77,4 +77,18 @@ public class ContactsPage {
 
         return isContain;
     }
+
+    public boolean listOfContactsDisplayed() {
+        boolean isDisplayed = true;
+        for (WebElement contact : contactsList) {
+            System.out.println("contact.isDisplayed() = " + contact.isDisplayed());
+            System.out.println("contact.getText() = " + contact.getText());
+            if(!contact.isDisplayed()){
+                  isDisplayed = false;
+                  break;
+              }
+        }
+
+        return  isDisplayed;
+    }
 }
