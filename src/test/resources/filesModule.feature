@@ -4,17 +4,17 @@ Feature: As a user, I should be able to access to Files module
     Given User  on the login page
     When User provide correct credentials
 
-  @ui
+  @ui @smoke
   Scenario: user should get access to Files module
     When User click on "Files"
     Then User should be directed on the "Files - Trycloud QA" page
 
-  @ui
+  @ui @smoke
   Scenario: user should get access to Photos module
     When User click on "Photos"
     Then User should be directed on the "Photos - Trycloud QA" page
 
-  @ui
+  @ui @smoke
   Scenario: user should be able create new folder
     When User click on "Files"
     And Click on Plus button
@@ -22,13 +22,13 @@ Feature: As a user, I should be able to access to Files module
     And give a name to new folder
     Then should be able to create new empty folder
 
-  @ui
+  @ui @smoke
   Scenario: user should be able to check all uploaded files from the page
     When User click on "Files"
     And click on checkbox for selecting all folders
     Then all folders should be selected
 
-  @ui
+  @ui @smoke
   Scenario: user should be able create new folder
     When User click on "Files"
     And Click on Plus button
@@ -36,7 +36,7 @@ Feature: As a user, I should be able to access to Files module
     And give a name to new folder
     Then should be able to create new empty folder
 
-  @ui
+  @ui @smoke
   Scenario: user should be able to add file to Favorites
     When User click on "Files"
     And User click on Action icon on second folder
@@ -44,7 +44,7 @@ Feature: As a user, I should be able to access to Files module
     And User click on favorites module on left side
     Then User should be able to see chosen file in favorites
 
-  @ui
+  @ui @smoke
   Scenario: user should be able to remove File From favorites
     When User click on "Files"
     And User click on favorites module on left side
@@ -67,14 +67,14 @@ Feature: As a user, I should be able to access to Files module
     Then Should be able to upload file in new folder "C:\Users\Vitalii\Desktop\IntelliJProjects\OnboardingInTCS_CydeoProjectFramework\src\test\resources\testData\Session1_ FolderStructure,Scanner.pdf"
     And user should be able to see file "Session1_" displayed on the page
 
-  @ui
+  @ui @smoke
   Scenario: User should be able to delete the folder/file
     When User click on "Files"
     And Click the action icon from any file
     And Click deleted files on left buttom corner
     Then Verify the deleted file is displayed on the page
 
-  @ui
+  @ui @smoke
   Scenario: verify users can write a comments to files/folders
     When  User click on "Files"
     And User click on Action icon on second folder
