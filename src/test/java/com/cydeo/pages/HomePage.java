@@ -59,6 +59,18 @@ public class HomePage {
     @FindBy(xpath = "//button[@aria-label='Send message']")
     private WebElement submitMessage;
 
+    @FindBy(xpath = "//span[@aria-label='Magnify icon']")
+    private WebElement magnifyIcon;
+
+    @FindBy(xpath = "//div[@id='recommendations']//li")
+    private List<WebElement> recommendedFiles;
+
+    @FindBy(xpath = "//input[@type='search']")
+    private WebElement searchInput;
+
+    @FindBy(xpath = "//h3[@class='unified-search__result-line-one']")
+    private WebElement searchResult;
+
     public boolean checkNamesOfModules(List<String> expectedList) {
         List<String> moduleNames = new ArrayList<>();
         for (WebElement module : mainModules) {
@@ -120,6 +132,10 @@ public class HomePage {
 
     }
 
+    public void clickOnButton(WebElement button) {
+        button.click();
+    }
+
     public boolean isTitle_Talk() {
         System.out.println("getTitle() = " + Driver.getDriver().getTitle());
         return Driver.getDriver().getTitle().startsWith("Talk");
@@ -138,7 +154,7 @@ public class HomePage {
     }
 
     public boolean checkIfMessageDisplayed(String messageText) {
-BrowserUtil.waitAlittle(2);
+        BrowserUtil.waitAlittle(2);
         boolean isMessageDisplayed = false;
         for (WebElement message : listOfWrittenMessages) {
             System.out.println("message.getText() = " + message.getText());
@@ -151,4 +167,25 @@ BrowserUtil.waitAlittle(2);
     }
 
 
+    public void clickOnMagnifyIcon() {
+        clickOnButton(magnifyIcon);
+    }
+
+    public void searchExistingFile() {
+
+        System.out.println("recommendedFiles.get(1).getText() = " + recommendedFiles.get(1).getText());
+
+        searchInput.sendKeys(recommendedFiles.get(1).getText());
+        BrowserUtil.waitAlittle(2);
+
+    }
+
+    public boolean fileAppearsOnSearchResults() {
+        boolean isAppears = false;
+        if(searchResult.getText().equals(recommendedFiles.get(1).getText())){
+            isAppears = true;
+
+        }
+        return isAppears;
+    }
 }

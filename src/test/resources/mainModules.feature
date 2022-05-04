@@ -50,6 +50,13 @@ Feature: All main modules should be placed correctly in right order
     When User click on "Contacts"
     Then List of contacts should be displayed on the screen
 
+@ui
+    Scenario: User should be able to search item/users from homepage
+      When User click on magnifier icon
+      And User begin to search for one of the files
+      Then File name should appear on the search box
+
+
 
 
 

@@ -64,4 +64,23 @@ public class HomePageStepDefs {
         Assert.assertTrue(homePage.checkIfMessageDisplayed(text));
     }
 
+    @When("User click on magnifier icon")
+    public void userClickOnMagnifierIcon() {
+
+        homePage.clickOnMagnifyIcon();
+
+    }
+
+    @And("User begin to search for one of the files")
+    public void userBeginToSearchForOneOfTheFiles() {
+
+        homePage.searchExistingFile();
+
+    }
+
+    @Then("File name should appear on the search box")
+    public void fileNameShouldAppearOnTheSearchBox() {
+
+        Assert.assertTrue(homePage.fileAppearsOnSearchResults());
+    }
 }
